@@ -1,6 +1,8 @@
 import "./userList.css";
-import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+import { DataGrid } from "@mui/x-data-grid";
+
+// import { DeleteOutline } from "@material-ui/icons";
+import DeleteOutline from "@mui/icons-material/DeleteOutline";
 import { useAccounts } from "../../Context/AccountsContext";
 import Avatar from "@mui/material/Avatar";
 

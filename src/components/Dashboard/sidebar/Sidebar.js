@@ -1,5 +1,7 @@
 import "./sidebar.css";
-import { PermIdentity } from "@material-ui/icons";
+// import { PermIdentity } from "@material-ui/icons";
+import { PermIdentity } from "@mui/icons-material";
+
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
