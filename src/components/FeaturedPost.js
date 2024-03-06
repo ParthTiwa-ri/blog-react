@@ -38,7 +38,10 @@ function FeaturedPost(props) {
             <Typography variant="subtitle2" paragraph>
               Category: {post.category}
             </Typography>
-            <Link to={`/post/${post.id}`}>
+            <Link
+              style={{ textDecoration: "none", color: "inherit" }}
+              to={`/post/${post.id}`}
+            >
               <Typography variant="subtitle1" color="primary">
                 Continue reading...
               </Typography>

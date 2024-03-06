@@ -30,10 +30,13 @@ function Header(props) {
   return (
     <React.Fragment>
       <Toolbar sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Button size="small">Subscribe</Button>
         <Typography
           component="h2"
           variant="h5"
           color="inherit"
+          align="center"
+          noWrap
           sx={{ flex: 1 }}
         >
           {title}
@@ -62,11 +65,16 @@ function Header(props) {
         sx={{
           justifyContent: "space-between",
           overflowX: "auto",
-          flexWrap: "wrap", // Allow the toolbar to wrap on smaller screens
+          flexWrap: "wrap",
         }}
       >
         {sections.map((section, index) => (
           <Link
+            style={{
+              color: "inherit",
+              cursor: "pointer",
+              textDecoration: "underline",
+            }}
             to={`/category/${section.title}`}
             color="inherit"
             key={section.title}
@@ -75,21 +83,11 @@ function Header(props) {
             sx={{
               p: 1,
               marginRight: "8px",
-              marginBottom: "16px", // Increase the marginBottom value to increase the gap
-              display: "inline-block", // Ensures each link is on a new line
+              marginBottom: "16px",
+              display: "inline-block",
             }}
           >
-            <p
-              style={{
-                p: 1,
-                marginRight: "60px",
-                marginBottom: "2px", // Increase the marginBottom value to increase the gap
-                display: "inline-block",
-                cursor: "pointer",
-              }}
-            >
-              {section.title}
-            </p>
+            <p style={{ textDecoration: "none" }}>{section.title}</p>
           </Link>
         ))}
       </Toolbar>

@@ -17,7 +17,6 @@ function MainFeaturedPost(props) {
         backgroundColor: "grey.800",
         color: "#fff",
         mb: 4,
-        mt: 6,
 
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
@@ -43,7 +42,7 @@ function MainFeaturedPost(props) {
           backgroundColor: "rgba(0,0,0,.3)",
         }}
       />
-      <Link to={`/post/${post.id}`}>
+      <Link style={{ textDecoration: "none" }} to={`/post/${post.id}`}>
         <div>
           <Grid container>
             <Grid item md={6}>

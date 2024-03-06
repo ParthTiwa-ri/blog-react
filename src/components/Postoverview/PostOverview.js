@@ -4,7 +4,21 @@ import "./PostOverview.css";
 import { useParams } from "react-router-dom";
 import { usePosts } from "../Context/PostContext";
 import ProductHeader from "../../ui/ProductHeader/ProductHeader";
+// import Header from "../Header";
 // import { Button } from "@mui/material";
+// const sections = [
+//   { title: "Academic Resources", url: "#" },
+//   { title: "Career Services", url: "#" },
+//   { title: "Campus", url: "#" },
+//   { title: "Culture", url: "#" },
+//   { title: "Local Community Resources", url: "#" },
+//   { title: "Social", url: "#" },
+//   { title: "Sports", url: "#" },
+//   { title: "Health and Wellness", url: "#" },
+//   { title: "Technology", url: "#" },
+//   { title: "Travel", url: "#" },
+//   { title: "Alumni", url: "#" },
+// ];
 function PostOverview() {
   const { id } = useParams();
   const { posts } = usePosts();
@@ -16,6 +30,7 @@ function PostOverview() {
   // }
   return (
     <div>
+      {/* <Header title="IIT Student Blog" sections={sections} /> */}
       <ProductHeader />
       <div>
         <div className="conatiner">

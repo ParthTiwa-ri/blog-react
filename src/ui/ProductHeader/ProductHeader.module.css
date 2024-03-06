@@ -23,7 +23,7 @@
 .container::before {
   content: "";
   position: absolute;
-  background-color: orange;
+  background-color: #1664c0;
   left: 0;
   height: 100%;
   width: 0.7rem;

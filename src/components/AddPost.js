@@ -123,11 +123,14 @@ export default function BasicModal() {
             sx={{ mt: 2 }}
           />
           <FormControl fullWidth sx={{ mt: 2 }}>
+            {" "}
+            {/* Increased mt value */}
             <InputLabel id="category-label">Category</InputLabel>
             <Select
               labelId="category-label"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
+              label="Category"
             >
               {categories.map((category) => (
                 <MenuItem key={category} value={category}>
@@ -136,6 +139,7 @@ export default function BasicModal() {
               ))}
             </Select>
           </FormControl>
+
           <input
             type="file"
             onChange={(e) => setImage(e.target.files[0])}
