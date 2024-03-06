@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Blog from "./components//Blog.js";
+import { PostProvider } from "./components/Context/PostContext.jsx";
+
+import SignUp from "./Pages/Signup.js";
+import SignIn from "./Pages/Sigin.js";
+import { AccountsProvider } from "./components/Context/AccountsContext.jsx";
+import { AuthProvider } from "./components/Context/AuthContext.jsx";
+import Category from "./components/Category.js";
+import PostDetail from "./components/PostDetail.js";
+import Dashboard from "./components/Dashboard/Dashboard.js";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <AccountsProvider>
+          <AuthProvider>
+            <PostProvider>
+              <Routes>
+                <Route index element={<Blog />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/dash" element={<Dashboard />} />
+
+                <Route path="/category/:cat" element={<Category />} />
+                <Route path="/post/:id" element={<PostDetail />} />
+              </Routes>
+            </PostProvider>
+          </AuthProvider>
+        </AccountsProvider>
+      </BrowserRouter>
+    </>
   );
 }
 
