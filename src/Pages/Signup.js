@@ -3,6 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
+import { v4 as uuidv4 } from "uuid";
 // import FormControlLabel from "@mui/material/FormControlLabel";
 // import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
@@ -17,11 +18,14 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useAccounts } from "../components/Context/AccountsContext";
+import { useAuth } from "../components/Context/AuthContext";
 
 function SignUp() {
   const { accounts, setAccounts } = useAccounts();
   const navigate = useNavigate();
   const [error, setError] = React.useState("");
+  const { setAuthenticated } = useAuth();
+
   const [role, setRole] = React.useState("");
 
   function addAccount(newuser) {
@@ -48,8 +52,10 @@ function SignUp() {
     }
 
     const name = `${firstName} ${lastName}`;
+    const id = uuidv4();
 
     const newuser = {
+      id,
       email,
       password,
       name,
@@ -59,6 +65,7 @@ function SignUp() {
 
     addAccount(newuser);
     alert("Successfully Signed Up");
+    setAuthenticated(false);
     navigate("/signin");
   };
 

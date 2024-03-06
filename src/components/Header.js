@@ -8,12 +8,23 @@ import Typography from "@mui/material/Typography";
 // import Link from "@mui/material/Link";
 import { Link, useNavigate } from "react-router-dom";
 import BasicModal from "./AddPost";
+import { useAccounts } from "./Context/AccountsContext";
+import { useAuth } from "./Context/AuthContext";
 
 function Header(props) {
   const { sections, title } = props;
   const navigate = useNavigate();
+  const { currAcc } = useAccounts();
+  const { isAuthenticated, setAuthenticated } = useAuth();
   function handleClick() {
     navigate("/signup");
+  }
+  function handleAdmin() {
+    navigate("/dashboard");
+  }
+  function handleSignOut() {
+    setAuthenticated(false);
+    navigate("/signin");
   }
   return (
     <React.Fragment>
@@ -30,12 +41,25 @@ function Header(props) {
           {title}
         </Typography>
         <IconButton>{/* <SearchIcon /> */}</IconButton>
+        {currAcc.role === "admin" ? (
+          <div style={{ marginRight: "30px" }}>
+            <Button variant="contained" size="small" onClick={handleAdmin}>
+              Admin Dashboard
+            </Button>
+          </div>
+        ) : null}
         <div style={{ marginRight: "30px" }}>
           <BasicModal />
         </div>
-        <Button variant="outlined" size="small" onClick={handleClick}>
-          Sign up
-        </Button>
+        {isAuthenticated === true ? (
+          <Button variant="outlined" size="small" onClick={handleSignOut}>
+            Sign out
+          </Button>
+        ) : (
+          <Button variant="outlined" size="small" onClick={handleClick}>
+            Sign up
+          </Button>
+        )}
       </Toolbar>
       <Toolbar
         component="nav"

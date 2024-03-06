@@ -13,12 +13,13 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 import { useAccounts } from "../components/Context/AccountsContext";
+import { useAuth } from "../components/Context/AuthContext";
 
 function SignIn() {
   const { accounts, setCurrAcc } = useAccounts();
   const navigate = useNavigate();
   const [error, setError] = React.useState("");
-  
+  const { setAuthenticated } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,6 +38,7 @@ function SignIn() {
     if (acc && acc.password === password && acc.status === "active") {
       alert("Successful login");
       setCurrAcc(acc);
+      setAuthenticated(true);
       navigate("/");
     } else {
       setError("Incorrect email or password.");

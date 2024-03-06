@@ -9,6 +9,8 @@ import { AuthProvider } from "./components/Context/AuthContext.jsx";
 import Category from "./components/Category.js";
 import PostDetail from "./components/PostDetail.js";
 import Dashboard from "./components/Dashboard/Dashboard.js";
+import ProtectedRoute from "./Pages/ProtectedRoute.js";
+import ProtectedDash from "./Pages/ProtectedDash.js";
 
 function App() {
   return (
@@ -18,10 +20,24 @@ function App() {
           <AuthProvider>
             <PostProvider>
               <Routes>
-                <Route index element={<Blog />} />
+                <Route
+                  index
+                  element={
+                    <ProtectedRoute>
+                      <Blog />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/signin" element={<SignIn />} />
-                <Route path="/dash" element={<Dashboard />} />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedDash>
+                      <Dashboard />
+                    </ProtectedDash>
+                  }
+                />
 
                 <Route path="/category/:cat" element={<Category />} />
                 <Route path="/post/:id" element={<PostDetail />} />

@@ -9,7 +9,7 @@ export default function Sidebar() {
         <div className="sidebarMenu"></div>
         <div className="sidebarMenu">
           <ul className="sidebarList">
-            <Link to="/users" className="link">
+            <Link to="/dashboard" className="link">
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
                 Users

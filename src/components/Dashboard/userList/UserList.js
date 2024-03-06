@@ -1,54 +1,19 @@
 import "./userList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { useState } from "react";
+import { useAccounts } from "../../Context/AccountsContext";
 import Avatar from "@mui/material/Avatar";
 
-const accounts = [
-  {
-    id: 1,
-    email: "lnsdf",
-    password: "msdflk",
-    name: "new name",
-    role: "admin",
-    status: "active",
-  },
-  {
-    id: 2,
-    email: "abc",
-    password: "abc",
-    name: "new name",
-    role: "moderator",
-    status: "active",
-  },
-  {
-    id: 3,
-    email: "a",
-    password: "a",
-    name: "a s",
-    role: "student",
-    status: "active",
-  },
-  {
-    id: 4,
-    email: "b",
-    password: "b",
-    name: "a s",
-    role: "moderator",
-    status: "active",
-  },
-];
-
 export default function UserList() {
-  const [data, setData] = useState(accounts);
+  const { accounts, setAccounts } = useAccounts();
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    setAccounts(accounts.filter((item) => item.id !== id));
   };
 
   const handleStatusChange = (id) => {
-    setData(
-      data.map((item) =>
+    setAccounts(
+      accounts.map((item) =>
         item.id === id
           ? {
               ...item,
@@ -63,7 +28,6 @@ export default function UserList() {
     let hash = 0;
     let i;
 
-    /* eslint-disable no-bitwise */
     for (i = 0; i < string.length; i += 1) {
       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
@@ -74,10 +38,10 @@ export default function UserList() {
       const value = (hash >> (i * 8)) & 0xff;
       color += `00${value.toString(16)}`.slice(-2);
     }
-    /* eslint-enable no-bitwise */
 
     return color;
   }
+
   function stringAvatar(name) {
     return {
       sx: {
@@ -111,6 +75,11 @@ export default function UserList() {
       headerName: "Status",
       width: 120,
       renderCell: (params) => {
+        // Check if role is admin
+        if (params.row.role === "admin") {
+          return <div>{params.row.status}</div>; // Just display status for admin
+        }
+
         return (
           <div
             onClick={() => handleStatusChange(params.row.id)}
@@ -129,6 +98,11 @@ export default function UserList() {
       headerName: "Action",
       width: 150,
       renderCell: (params) => {
+        // Check if role is admin
+        if (params.row.role === "admin") {
+          return null; // Don't render anything for admin
+        }
+
         return (
           <>
             <DeleteOutline
@@ -144,7 +118,7 @@ export default function UserList() {
   return (
     <div className="userList">
       <DataGrid
-        rows={data}
+        rows={accounts}
         disableSelectionOnClick
         columns={columns}
         pageSize={8}
