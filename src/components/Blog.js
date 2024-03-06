@@ -31,15 +31,6 @@ const sections = [
   { title: "Alumni", url: "#" },
 ];
 
-const mainFeaturedPost = {
-  title: "Power of Effective Time Management",
-  description:
-    "As students, we often find ourselves juggling multiple tasks, deadlines, and commitments..",
-  image: "https://source.unsplash.com/random?wallpapers",
-  imageText: "main image description",
-  linkText: "Continue reading…",
-};
-
 // const posts = [post1, post2, post3];
 
 // const sidebar = {
@@ -73,6 +64,7 @@ export default function Blog() {
   const { posts } = usePosts();
   console.log(posts);
   let featuredPosts = posts;
+  const mainFeaturedPost = posts[3];
 
   return (
     <ThemeProvider theme={defaultTheme}>
