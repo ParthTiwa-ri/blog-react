@@ -1,20 +1,20 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { usePosts } from "./Context/PostContext";
-import { Button, Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 
 import FeaturedPost from "./FeaturedPost";
 
 function Category() {
   const { cat } = useParams();
   const { posts } = usePosts();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // Filter posts by category
   const finalPosts = posts.filter((item) => item.category === cat);
 
-  function handleBack() {
-    navigate(-1);
-  }
+  // function handleBack() {
+  //   navigate(-1);
+  // }
   return (
     <div style={{ margin: "50px auto" }}>
       <Container maxWidth="lg">
@@ -33,13 +33,13 @@ function Category() {
         </Typography>
 
         <main>
-          <Button
+          {/* <Button
             style={{ position: "absolute", top: "5%", left: "5%" }}
             variant="contained"
             onClick={handleBack}
           >
             Back
-          </Button>
+          </Button> */}
           {finalPosts.length === 0 ? (
             <Typography variant="h5" align="center">
               No posts available in this category.

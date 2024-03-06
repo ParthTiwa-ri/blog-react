@@ -1,29 +1,32 @@
 import React from "react";
 import Comments from "./Comments";
 import "./PostOverview.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { usePosts } from "../Context/PostContext";
-import { Button } from "@mui/material";
+import ProductHeader from "../../ui/ProductHeader/ProductHeader";
+// import { Button } from "@mui/material";
 function PostOverview() {
   const { id } = useParams();
   const { posts } = usePosts();
   const finalPost = posts.find((item) => item.id === id);
   console.log(finalPost);
-  const navigate = useNavigate();
-  function handleBack() {
-    navigate(-1);
-  }
+  // const navigate = useNavigate();
+  // function handleBack() {
+  //   navigate(-1);
+  // }
   return (
     <div>
+      <ProductHeader />
       <div>
         <div className="conatiner">
-          <Button
-            style={{ position: "absolute", top: "5%", left: "5%" }}
+          {/* <Button
+            size="small"
+            style={{ position: "absolute", top: 0 }}
             variant="contained"
             onClick={handleBack}
           >
             Back
-          </Button>
+          </Button> */}
           <div>
             <p className="post-title">{finalPost.title}</p>
             <div className="post-info">
