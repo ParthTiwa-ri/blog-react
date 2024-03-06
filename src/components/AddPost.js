@@ -10,6 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import { usePosts } from "./Context/PostContext";
 import { v4 as uuidv4 } from "uuid";
+import { useAccounts } from "./Context/AccountsContext";
 
 const style = {
   position: "absolute",
@@ -43,10 +44,10 @@ export default function BasicModal() {
   const [category, setCategory] = React.useState("");
   const [image, setImage] = React.useState(null);
   const { onAddPost } = usePosts();
-
+  const { currAcc } = useAccounts();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const user = currAcc.name;
   const months = [
     "Jan",
     "Feb",
@@ -77,6 +78,8 @@ export default function BasicModal() {
       category: category,
       date: formattedDate,
       image: image ? URL.createObjectURL(image) : null,
+      createdBy: user,
+      comments: [],
       // You can add other fields like image, imageLabel, etc. if needed
     };
 

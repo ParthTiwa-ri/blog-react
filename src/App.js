@@ -7,10 +7,11 @@ import SignIn from "./Pages/Sigin.js";
 import { AccountsProvider } from "./components/Context/AccountsContext.jsx";
 import { AuthProvider } from "./components/Context/AuthContext.jsx";
 import Category from "./components/Category.js";
-import PostDetail from "./components/PostDetail.js";
+// import PostDetail from "./components/PostDetail.js";
 import Dashboard from "./components/Dashboard/Dashboard.js";
 import ProtectedRoute from "./Pages/ProtectedRoute.js";
 import ProtectedDash from "./Pages/ProtectedDash.js";
+import PostOverview from "./components/Postoverview/PostOverview.js";
 
 function App() {
   return (
@@ -40,7 +41,7 @@ function App() {
                 />
 
                 <Route path="/category/:cat" element={<Category />} />
-                <Route path="/post/:id" element={<PostDetail />} />
+                <Route path="/post/:id" element={<PostOverview />} />
               </Routes>
             </PostProvider>
           </AuthProvider>

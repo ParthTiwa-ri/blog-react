@@ -35,8 +35,8 @@ function FeaturedPost(props) {
             <Typography variant="subtitle1" paragraph>
               {post.description}
             </Typography>
-            <Typography variant="subtitle1" paragraph>
-              {post.category}
+            <Typography variant="subtitle2" paragraph>
+              Category: {post.category}
             </Typography>
             <Link to={`/post/${post.id}`}>
               <Typography variant="subtitle1" color="primary">

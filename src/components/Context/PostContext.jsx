@@ -1,19 +1,11 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { faker } from "@faker-js/faker";
+
+// CREATE A CONTEXT
+const PostContext = createContext();
 
 function createRandomFeature() {
-  const titles = [
-    "Mastering the Art of Note-Taking",
-    "Importance of Self-Care",
-    // Add more titles as needed
-  ];
-
-  const descriptions = [
-    "Discover expert tips and methods for taking effective notes.",
-    "Explore the significance of prioritizing self-care amidst the demands of student life.",
-    // Add more descriptions as needed
-  ];
-
   const categories = [
     "Academic Resources",
     "Career Services",
@@ -29,28 +21,39 @@ function createRandomFeature() {
   ];
 
   const dates = ["Nov 12", "Nov 11" /* Add more dates as needed */];
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   return {
     id: uuidv4(),
-    title: titles[Math.floor(Math.random() * titles.length)],
+    title: `${capitalizeFirstLetter(
+      faker.hacker.adjective()
+    )} ${capitalizeFirstLetter(faker.hacker.noun())}`,
     date: dates[Math.floor(Math.random() * dates.length)],
-    description: descriptions[Math.floor(Math.random() * descriptions.length)],
+    description: faker.hacker.phrase(),
     image: "https://source.unsplash.com/random?wallpapers",
     imageLabel: "Image Text",
     category: categories[Math.floor(Math.random() * categories.length)],
+    createdBy: "Vivek",
+    comments: [],
   };
 }
 
-// CREATE A CONTEXT
-const PostContext = createContext();
-
 function PostProvider({ children }) {
-  const [posts, setPosts] = useState(() =>
-    Array.from({ length: 30 }, () => createRandomFeature())
-  );
+  const [posts, setPosts] = useState(() => {
+    const storedPosts = localStorage.getItem("posts");
+    return storedPosts
+      ? JSON.parse(storedPosts)
+      : Array.from({ length: 20 }, () => createRandomFeature());
+  });
+
+  useEffect(() => {
+    localStorage.setItem("posts", JSON.stringify(posts));
+  }, [posts]);
 
   function handleAddPost(post) {
-    setPosts((posts) => [post, ...posts]);
+    setPosts((prevPosts) => [post, ...prevPosts]);
   }
 
   function handleClearPosts() {
@@ -58,7 +61,7 @@ function PostProvider({ children }) {
   }
 
   function handleDeletePost(postId) {
-    setPosts(posts.filter((post) => post.id !== postId));
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
   }
 
   const value = {
@@ -66,6 +69,7 @@ function PostProvider({ children }) {
     onAddPost: handleAddPost,
     onClearPosts: handleClearPosts,
     onDeletePost: handleDeletePost,
+    setPosts,
   };
 
   return <PostContext.Provider value={value}>{children}</PostContext.Provider>;
